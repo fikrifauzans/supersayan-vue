@@ -1,14 +1,15 @@
 <template>
-  <q-field v-if="currency == ''" :label="label" :dense="dense === false ? false : true" :model-value="modelValue"
+  <q-field :label="label" :dense="dense === false ? false : true" :model-value="modelValue"
     :rules="required == '' ? [(val) => !!val || 'Field is required'] : false" outlined :prefix="prefix"
-    :class="`q-absolute_label col-12 col-sm-6 col-md-${col} q-px-xs q-mb-md`" :readonly="readonly == ''"
+    :class="`q-absolute_label col-12 col-sm-6 col-md-${col} q-px-xs q-mb-lg`" :readonly="readonly == ''"
     :color="color ? color : 'primary'">
+
     <template v-slot:control="{ id, floatingLabel }">
       <money :id="id" class="q-field__input text-right" :model-value="modelValue" v-bind="moneyFormatForComponent"
         v-show="floatingLabel" @update:model-value="(value) => {
-            $emit('update:modelValue', parseInt(value));
-            $emit('onkeyup');
-          }
+          if (max && parseInt(value) >= max) $emit('update:modelValue', max)
+          else { $emit('update:modelValue', parseInt(value)); $emit('updateEvent'); }
+        }
           " :readonly="readonly == ''" />
     </template>
   </q-field>
@@ -26,7 +27,10 @@ export default {
     "readonly",
     "currency",
     "prefix",
+
     "color",
+    "max",
+    "topLabel",
   ],
   components: { money: Money3Component },
   name: "InputText",
@@ -41,6 +45,11 @@ export default {
       },
     };
   },
+  watch: {
+    modelValue(value) {
+
+    }
+  }
 };
 </script>
 <style></style>

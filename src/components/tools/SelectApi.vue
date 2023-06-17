@@ -1,50 +1,21 @@
 <template>
-  <div
-    :class="`col-12 col-sm-6 col-md-${col} q-px-xs ${
-      required != '' ? 'q-mb-sm' : 'q-mb-sm'
-    }`"
-  >
+  <div :class="`col-12 col-sm-6 col-md-${col} q-px-xs ${required != '' ? 'q-mb-sm' : 'q-mb-sm'
+    }`">
     <!-- <div class="q-mb-sm q-mx-sm">{{ topLabel }}</div> -->
 
-    <q-select
-      v-if="multiple == undefined"
-      outlined
-      dense
-      @update:model-value="(val) => updateValue(val)"
-      :model-value="model"
-      :option-label="optionLabel ? optionLabel : 'name'"
-      :option-value="optionValue ? optionValue : val"
-      use-input
-      :use-chips="multiple === '' ? true : false"
-      input-debounce="0"
-      map-options
-      :emit-value="true"
-      :label="label"
-      :options="options"
-      @filter="filterFn"
-      :required="required === ''"
-      :rules="
-        required === '' ? [(model) => !!model || 'Field is required'] : false
-      "
-      @filter-abort="abortFilterFn"
-      :class="`q-absolute_label`"
-    >
+    <q-select v-if="multiple == undefined" outlined dense @update:model-value="(val) => updateValue(val)"
+      :model-value="model" :option-label="optionLabel ? optionLabel : 'name'"
+      :option-value="optionValue ? optionValue : val" use-input :use-chips="multiple === '' ? true : false"
+      input-debounce="0" map-options :emit-value="true" :label="label" :options="options" @filter="filterFn"
+      :required="required === ''" :rules="required === '' ? [(model) => !!model || 'Field is required'] : false
+        " @filter-abort="abortFilterFn" :class="`q-absolute_label`">
       <template v-slot:append>
-        <q-btn
-          v-if="modelValue != null"
-          icon="close"
-          size="xs"
-          flat
-          round
-          rounded
-          @click="
-            (val) => {
-              model = null;
-              $emit('update:modelValue', null);
-              $emit('updateEvent', null);
-            }
-          "
-        />
+        <q-btn v-if="modelValue != null" icon="close" size="xs" flat round rounded @click="(val) => {
+          model = null;
+          $emit('update:modelValue', null);
+          $emit('updateEvent', null);
+        }
+          " />
       </template>
       <template v-slot:no-option>
         <q-item>
@@ -52,42 +23,17 @@
         </q-item>
       </template>
     </q-select>
-    <q-select
-      v-else
-      outlined
-      dense
-      @update:model-value="(val) => $emit('update:modelValue', val)"
-      :model-value="modelValue"
-      :option-label="optionLabel ? optionLabel : 'name'"
-      :option-value="optionValue ? optionValue : val"
-      use-input
-      :use-chips="useChip === '' ? true : false"
-      input-debounce="0"
-      map-options
-      :emit-value="true"
-      :label="label"
-      :options="options"
-      @filter="filterFn"
-      :required="required == ''"
-      :rules="required == '' ? [(val) => !!val || 'Field is required'] : false"
-      @filter-abort="abortFilterFn"
-      multiple
-      :class="`q-absolute_label`"
-    >
+    <q-select v-else outlined dense @update:model-value="(val) => $emit('update:modelValue', val)"
+      :model-value="modelValue" :option-label="optionLabel ? optionLabel : 'name'"
+      :option-value="optionValue ? optionValue : val" use-input :use-chips="useChip === '' ? true : false"
+      input-debounce="0" map-options :emit-value="true" :label="label" :options="options" @filter="filterFn"
+      :required="required == ''" :rules="required == '' ? [(val) => !!val || 'Field is required'] : false"
+      @filter-abort="abortFilterFn" multiple :class="`q-absolute_label`">
       <template v-slot:append>
-        <q-btn
-          v-if="modelValue != null"
-          icon="close"
-          size="xs"
-          flat
-          round
-          rounded
-          @click="
-            (val) => {
-              this.$emit('update:modelValue', []);
-            }
-          "
-        />
+        <q-btn v-if="modelValue != null" icon="close" size="xs" flat round rounded @click="(val) => {
+          this.$emit('update:modelValue', []);
+        }
+          " />
       </template>
       <template v-slot:no-option>
         <q-item>
@@ -138,7 +84,7 @@ export default {
       if (!this.select && this.select != undefined)
         endpoint += `&select=id,name`;
       else if (this.full == undefined && this.select != undefined)
-        endpoint += `?&select=${this.select.join(",")}`;
+        endpoint += `&select=${this.select.join(",")}`;
       if (val != "")
         endpoint += `&like=${this.field ? this.field : "name"}:${val}`;
       if (this.search == "" && val != "") endpoint += "&search=" + val;
@@ -150,7 +96,7 @@ export default {
               this.options = data.data;
             });
         },
-        (e) => {}
+        (e) => { }
       );
     },
 
@@ -169,7 +115,7 @@ export default {
       console.log(val);
       if (typeof val == "object") return false;
       let endpoint = this.api;
-       endpoint += "?table=";
+      endpoint += "?table=";
       let requestEndpoint = this.checkHasFirstRequest(endpoint);
       if (this.optionValue != null)
         endpoint += `${requestEndpoint}where=${this.optionValue}:${val}`;

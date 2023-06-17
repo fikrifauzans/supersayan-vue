@@ -58,7 +58,8 @@ export default {
     const year = date.getFullYear()
     const hours = date.getHours()
     const minute = date.getMinutes()
-    return `${year}-${month}-${day} ${hours}:${minute}`
+    const secconds = date.getSeconds()
+    return `${year}-${month}-${day} ${hours}:${minute}:${secconds}`
 
   }
 

@@ -27,6 +27,10 @@
 
               total:null,
 
+              transaction_details:[
+                
+              ]
+
             },
    
             table: {

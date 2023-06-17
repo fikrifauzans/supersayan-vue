@@ -7,8 +7,7 @@
       :clearable="multiple === undefined ? true : false" :multiple="multiple === '' ? true : false"
       :use-chips="multiple === '' ? true : false" :hide-selected="multiple === '' ? false : true"
       :class="className ? className : ''" :style="styles ? styles : ''" :modelValue="modelValue"
-      @update:modelValue="emiters($event)" lazy-rules :rules="
-        required === ''
+      @update:modelValue="emiters($event)" lazy-rules :rules="required === ''
           ? [
             (val) =>
               (val !== null && val !== '') || label + ' must be filled!',
@@ -16,7 +15,7 @@
           : rules
             ? rules
             : [(val) => val !== ' ' || 'clear space!']
-      " :readonly="readonly === '' ? true : false" :placeholder="placeholder ? placeholder : ''">
+        " :readonly="readonly === '' ? true : false" :placeholder="placeholder ? placeholder : ''">
       <template v-slot:no-option>
         <q-item>
           <q-item-section class="text-grey">
