@@ -1,7 +1,7 @@
 <template>
   <div>
     <s-loading :load="loading" />
-    <s-drawer @refresh="refresh" :Meta="Meta" @update:modelValue="refresh" :table="Meta.table">
+    <s-drawer wrapCard   @refresh="refresh" :Meta="Meta" @update:modelValue="refresh" :table="Meta.table">
       <q-table virtual-scroll class="q-my-sm" :rows="table.rows" :columns="table.columns" row-key="id"
         selection="multiple" v-model:selected="table.selected" v-model:pagination="table.pagination"
         :style="$Static.table.height()" :dense="$Static.table.dense()" :flat="$Static.table.flat()"

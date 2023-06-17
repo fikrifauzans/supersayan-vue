@@ -8,11 +8,9 @@
     </div>
     <div v-if="$q.screen.gt.sm" class="col-md-7 relative-position bg-secondary">
       <div class="fit row justify-center items-center relative-position">
-        <q-img src="~assets/images/icon.png" style="width: 400px;" />
-        <div class="col-8 text-primary">
-          Aplikasi ini dibuat untuk membantu kamu dalam
-          mengembangkan kompetensi dan keterampilan yang
-          diperlukan dalam praktik klinis pada stase kehamilan
+        <q-img src="~assets/images/login-background.jpg" style="width: 400px;" />
+        <div class="col-12  q-mb-md text-primary absolute-bottom text-center">
+          Aplikasi ini dibuat untuk kebutuhan interview 
         </div>
       </div>
     </div>
