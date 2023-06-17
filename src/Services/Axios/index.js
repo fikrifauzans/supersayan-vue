@@ -1,5 +1,5 @@
 import axios from 'axios'
-import Token from './properties'
+import Error from './error'
 import System from '../System/index.js'
 import H_Language from '../Lang/index'
 import Handler from '../Handler/index'
@@ -16,7 +16,7 @@ const api = axios.create(
     transitional: {
       silentJSONParsing: true
     },
-    responseType: "json"
+    // responseType: "json"
   })
 
 class Api {
@@ -32,13 +32,10 @@ class Api {
   setAuthToken() {
     let token = this.Handle.getLS('_token')
     this.api.defaults.headers.common = { 'Authorization': `Bearer ${token}` }
-    // console.log(token);
+
   }
   setDefaultHeader() {
     this.api.defaults.headers = { 'Accept': "application/json" }
-    this.api.defaults.headers = { 'Pragma': 'no-cache', }
-    this.api.defaults.headers = { 'Expires': '0' }
-    // this.api.defaults.headers = { 'Access-Control-Allow-Origin': "*" }
     return this
   }
   setMultipartForm() {
@@ -46,8 +43,8 @@ class Api {
     return this
   }
 
-  get(endpoint, callback, error, firstSegment = null, responseType = 'json') {
-    return this.R_validate('get', endpoint, null, callback, error, responseType, firstSegment)
+  async get(endpoint, callback, error, firstSegment = null, responseType = 'json') {
+    return await this.R_validate('get', endpoint, null, callback, error, responseType, firstSegment)
   }
   delete(endpoint, callback, error, firstSegment = null, responseType = 'json') {
     return this.R_validate('delete', endpoint, null, callback, error, responseType, firstSegment)
@@ -60,6 +57,8 @@ class Api {
   }
 
   async R_validate(method, endpoint, payload, callback, error, responseType, firstSegment) {
+
+
     // IF FIRSTSEGMENT = null
     let url = ''
     if (firstSegment == null) url = this.apiVersion + this.Lang.getLang().toLowerCase() + '/' + endpoint
@@ -70,7 +69,7 @@ class Api {
     // GET METHOD
 
     if (method == 'get') {
-      await this.api({ method, url, responseType: 'json' }).then(
+      await this.api({ method, url, responseType }).then(
         (response) => {
           let [data, status, message, raw_response] = [response.data.data, response.status, response.data.message, response]
 
@@ -79,11 +78,9 @@ class Api {
       ).catch((e) => {
         if (e && e.response) {
           const [errorMessage, errorStatus, errorHeaders] = [e.response.data, e.response.status, e.response.headers]
-          if (e.response.status == 403) {
-            // Kalo Permission Denied
-            const u = '/403';
-            window.location = u
-          }
+          // # Error Message 
+          this.errorMessage(e.response.status, e)
+          // # Response Default 
           if (errorStatus == 401) {
             error(e.response) // Masuk ke callback
           }
@@ -92,17 +89,15 @@ class Api {
     }
     //DELETE
     if (method == 'delete') {
-      await this.api({ method, url, responseType: 'json' }).then(
+      await this.api({ method, url, responseType }).then(
         (response) => {
           const [data, status, message, raw_response] = [response.data.data, response.status, response.data.message, response]
           callback(data, status, message, raw_response)
         }
       ).catch((e) => {
-        if (e.response.status == 403) {
-          // Kalo Permission Denied
-          const u = '/403';
-          window.location = u
-        }
+        // # Error Message 
+        this.errorMessage(e.response.status, e)
+        // # Response Default 
         if (e && e.response) {
           const [errorMessage, errorStatus, errorHeaders] = [e.response.data, e.response.status, e.response.headers]
           error(errorMessage, errorStatus, errorHeaders)
@@ -111,18 +106,16 @@ class Api {
     }
     // PUT
     if (method == 'put') {
-      await this.api({ method, url, data: payload, responseType: 'json' }).then(
+      await this.api({ method, url, data: payload, responseType }).then(
         (response) => {
           const [data, status, message, raw_response] = [response.data.data, response.status, response.data.message, response]
           callback(data, status, message, raw_response)
 
         }
       ).catch((e) => {
-        if (e.response.status == 403) {
-          // Kalo Permission Denied
-          const u = '/403';
-          window.location = u
-        }
+        // #error Message 
+        this.errorMessage(e.response.status, e)
+
         if (e && e.response) {
           const [errorMessage, errorStatus, errorHeaders] = [e.response.data, e.response.status, e.response.headers]
           error(errorMessage, errorStatus, errorHeaders)
@@ -131,46 +124,30 @@ class Api {
       })
     }
     if (method == 'post') {
-      await this.api({ method, url, data: payload, responseType: 'json' }).then(
+      await this.api({ method, url, data: payload, responseType }).then(
         (response) => {
           const [data, status, message, raw_response] = [response.data.data, response.status, response.data.message, response]
           callback(data, status, message, raw_response)
         }
       ).catch((e) => {
-        console.log(e);
-        if (e.response.status == 403) {
-          // Kalo Permission Denied
-          const u = '/403';
-          window.location = u
-        }
-        if (e && e.response) {
-          const [errorMessage, errorStatus, errorHeaders] = [e.response.data, e.response.status, e.response.headers]
-          error(errorMessage, errorStatus, errorHeaders)
-        }
-      })
-    }
 
-  }
-  async fileHandler(file, reference = null, method = 'post') {
-    if (!file.file) return false
-    let fileUploaded = null
-    if (method == 'post') {
-      let fileUplad = this.Handle.loopingForm(file);
-      this.setMultipartForm();
-      await this.post('files', fileUplad,
-        async (data, status) => {
-          fileUploaded = await data
-        }, (e) => { })
-      return fileUploaded
-    } else if (method == 'update') {
-      let fileUplad = this.Handle.loopingForm(file);
-      this.setMultipartForm();
-      await this.post('files/' + file.id, fileUplad,
-        async (data, status) => {
-          fileUploaded = await data
-          console.log(fileUploaded);
-        }, (e) => { })
-      return fileUploaded
+        this.errorMessage(e.response.status, e)
+        // if (e.code === 'ECONNABORTED') {
+        //   return console.log('waktu Habis');
+        // };
+        // if (e.response.status == 422) {
+        //   // Kalo Validasi salah 
+        // }
+        // if (e.response.status == 403) {
+        //   // Kalo Permission Denied
+        //   const u = '/403';
+        //   window.location = u
+        // }
+
+        const [data, status, message, raw_response] = [response.data.data, response.status, response.data.message, response]
+        callback(data, status, message, raw_response)
+
+      })
     }
 
   }
@@ -180,7 +157,7 @@ class Api {
 
 
 // SAME LIKE {...Token}
-Object.assign(Api.prototype, Token)
+Object.assign(Api.prototype, Error)
 
 export default Api
 

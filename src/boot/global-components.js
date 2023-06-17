@@ -5,6 +5,7 @@ import {
 // SYSTEM
 import Menu from '../components/system/Menu.vue'
 import Filter from '../components/system/Filter.vue'
+import FilterTable from '../components/system/FilterTable.vue'
 import Brand from '../components/system/Brand.vue'
 import Header from '../components/system/HeaderCms.vue'
 import TopTable from '../components/system/TopTable.vue'
@@ -55,6 +56,7 @@ export default boot(async ({
 }) => {
   app.component('s-menu', Menu)
   app.component('s-filter', Filter)
+  app.component('s-filter-table', FilterTable)
   app.component('s-brand', Brand)
   app.component('s-drawer', Header)
   app.component('s-top-table', TopTable)

@@ -2,12 +2,9 @@ class System {
 
   // API CONFIG
   apiRoot() {
-    // return process.env.API_BASE_URL ?? 'https://api.beytcoffeetigabelas.com'
-    return 'https://api.pregnancy-learning.com/'
-    if (window.location.origin == 'http://localhost:8080') {
-      return 'http://localhost:8090/'
-    } else if (window.location.origin == 'https://cms.pregnancy-learning.com') {
-    }
+
+    if (window.location.origin == 'http://localhost:8080') return 'http://localhost:8090/'
+    // else if (window.location.origin == 'https://cms.pregnancy-learning.com') 
   }
   apiTimeout() { return 10000 }
 

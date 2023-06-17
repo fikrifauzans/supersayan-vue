@@ -1,29 +1,25 @@
 <template>
-  <div class="col-12 row q-mb-md">
-    <div class="row col-12 justify-between items-start">
-      <div class="row">
-        <q-item class="q-pa-none text-dark" color="primary" v-ripple>
+  <div class="col-12 row q-mb-md relative-position">
+    <div :class="$q.screen.lt.md ? 'row col-12 justify-end items-start' : 'row col-12 justify-between items-start'">
+      <div :class="$q.screen.lt.md ? 'row   col-12 relative-position' : 'row   '">
+        <q-item :class="$q.screen.lt.md ? 'q-pa-none text-dark col-12' : 'q-pa-none text-dark'" color="primary" v-ripple>
           <q-item-section>
             <!-- <q-item-label caption>{{ Meta ? Meta.module_name : "" }}</q-item-label> -->
-            <q-item-label class="text-h6 text-bold q-mt-sm">Tabel {{
-              title ? title : Meta ?
-              Meta.name : ""
-            }}
+            <q-item-label class="text-h6 text-bold q-mt-sm">Tabel {{ title ? title : Meta ? Meta.name : "" }}
             </q-item-label>
             <div>
               <slot name="description" />
               <div class="top-table-description">
-              {{  description ? description : Meta ?
-              Meta.description : ""}}
+                {{ description ? description : Meta ? Meta.description : "" }}
               </div>
             </div>
             <div class="row items-center">
               <!-- Add  -->
-              <div class="q-mt-md">
+              <div :class="$q.screen.lt.md ? 'q-mt-md  ' : 'q-mt-md'">
                 <t-button v-if="!Meta.hide_add &&
-                    this.$Handle.checkPermission(Meta.module + '-store')
-                    " :label="$q.screen.lt.md ? null : `Tambah ${Meta.name}`" size="md"  icon="add"
-                  active="true"  @click="$emit('add')" />
+                  this.$Handle.checkPermission(Meta.module + '-store')
+                " :label="$q.screen.lt.md ? 'Tambah' : `Tambah ${Meta.name}`" size="md" icon="add" active="true"
+                  :class="$q.screen.lt.md ? 'absolute-top-right' : ''" @click="$emit('add')" />
               </div>
             </div>
           </q-item-section>
@@ -35,7 +31,7 @@
             @click="modalConfirm.restore = !modalConfirm.restore">
             <q-tooltip> Restore </q-tooltip>
           </q-btn>
-          <!-- DELETE  -->
+          <!-- # DELETE  -->
           <q-btn
             v-if="!Meta.hide_delete && table && table.selected.length > 0 && this.$Handle.checkPermission(Meta.module + '-destroy')"
             icon="delete" size="sm" rounded round class="bg-negative q-mt-sm text-white"
@@ -46,54 +42,58 @@
         </div>
       </div>
 
+      <div
+        :class="$q.screen.lt.md ? ' row items-center justify-between q-mt-sm' : 'row items-center justify-between q-mt-sm'">
+        <div class="row items-center relative-position">
+          <!-- # SEARCH TABLE  -->
+          <div>
+            <!-- <q-btn-dropdown color="dark" size="md" flat icon="img:images/icons/settings.svg" menu-anchor="top left"> -->
+            <div class="row q-pa-xs q-gutter-sm">
 
-      <div class=" row items-center justify-between q-mt-sm">
-
-        <div class="row items-center">
-          <!-- SEARCH TABLE  -->
-          <div class=" ">
-            <q-btn-dropdown color="dark" size="md"  flat icon="img:images/icons/settings.svg" menu-anchor="top left">
-              <div class="row q-pa-xs q-gutter-sm">
-                <!-- TRASH -->
-                <div>
-                  <q-btn v-if="this.$Handle.checkPermission(Meta.module + '-bin')" icon="recycling" :class="trash == true
-                    ? 'bg-grey- text-primary '
-                    : 'bg-primary text-white '
-                    " @click="getTrash" size="sm" rounded flat round>
-                    <q-tooltip> Recycle Bin </q-tooltip>
-                  </q-btn>
-                </div>
-
-                <!-- EXPORT  -->
-                <q-btn v-if="this.$Handle.checkPermission(Meta.module + '-csv')" color="dark" round flat size="sm" rounded
-                  icon="archive" no-caps @click="$Handle.exportTable(table.columns, table.rows)">
-                  <q-tooltip> Export CSV </q-tooltip>
+              <!-- # TRASH -->
+              <div>
+                <q-btn v-if="trash" noCaps unelevated="" size=xs label="Trash" color="negative" class="q-mr-md" />
+                <q-btn v-if="this.$Handle.checkPermission(Meta.module + '-bin')" icon="recycling" :class="trash == true
+                  ? 'bg-grey- text-primary '
+                  : 'bg-primary text-white '
+                " @click="getTrash" size="sm" rounded flat round>
+                  <q-tooltip> Recycle Bin </q-tooltip>
                 </q-btn>
-                <div>
-                  <q-btn icon="tune" :class="filter && $Help.transformQuery(filter.query)
-                    ? 'bg-white text-grey   '
-                    : 'bg-white text-dark   '
-                    " @click="$emit('onFilter')" flat size="sm" rounded round square style="border-radius: 15px">
-                    <q-tooltip> Filter</q-tooltip>
-                  </q-btn>
-                </div>
               </div>
-            </q-btn-dropdown>
+
+              <!-- # EXPORT  -->
+              <q-btn v-if="this.$Handle.checkPermission(Meta.module + '-csv')" color="dark" round flat size="sm" rounded
+                icon="archive" no-caps @click="$Handle.exportTable(table.columns, table.rows)">
+                <q-tooltip> Export CSV </q-tooltip>
+              </q-btn>
+              <div>
+                <q-btn-dropdown icon="filter_list" size="sm" unelevated="" flat color="primary">
+                  <div class="column no-wrap q-pa-md">
+                    <q-toggle v-for="(item, index ) in table.columns" :key="index" :label="item.label"
+                      v-model="invisbleColumn[index]" :true-value="item.name"
+                      @update:modelValue="() => $emit('updateVisibilityColumn', invisbleColumn)" />
+                  </div>
+                </q-btn-dropdown>
+              </div>
+            </div>
+
+          </div>
+          <div>
+            <q-input outlined :model-value="modelValue" @keyup.prevent="handleKeypress" @update:modelValue="(val) => {
+              $emit('update:modelValue', val);
+              $emit('refresh');
+            }
+            " label="Search Table" dense class="q-absolute_label q-ml-sm">
+              <template v-slot:append>
+                <div>
+                  <q-btn icon="cancel" flat v-if="modelValue != null && modelValue !== ''" @click="seachReset"
+                    class="q-pa-xs" size="md" rounded />
+                  <q-icon name="search" v-else />
+                </div>
+              </template>
+            </q-input>
           </div>
 
-          <q-input outlined :model-value="modelValue" @keyup.prevent="handleKeypress" @update:modelValue="(val) => {
-            $emit('update:modelValue', val);
-            $emit('refresh');
-          }
-            " label="Search Table" dense class="q-absolute_label q-ml-sm">
-            <template v-slot:append>
-              <div>
-                <q-btn icon="cancel" flat v-if="modelValue != null" @click="seachReset" class="q-pa-xs" size="md"
-                  rounded />
-                <q-icon name="search" v-else />
-              </div>
-            </template>
-          </q-input>
         </div>
       </div>
     </div>
@@ -137,6 +137,9 @@
           </q-card-actions>
         </q-card>
       </q-dialog>
+
+
+
     </div>
 
   </div>
@@ -145,10 +148,18 @@
 export default {
   props: ["trash", "modelValue", "table", "filter", "Meta", "title"],
   created() {
+
+    // # Ivisible Column Table 
+    if (this.Meta && this.Meta.table && this.Meta.table.columns()) {
+      const columns = this.Meta.table.columns()
+      this.invisbleColumn = (columns.map((v) => v.name));
+    }
   },
   data() {
     return {
       modalConfirm: { delete: false, restore: false },
+      invisbleColumn: [],
+      columns: []
     };
   },
   methods: {

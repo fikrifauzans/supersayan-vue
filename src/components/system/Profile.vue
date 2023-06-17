@@ -8,7 +8,7 @@
       <t-input col="4" label="address" r-icon="home" v-model="model.address" />
       <t-input col="4" label="phone" v-model="model.phone" />
       <t-select-api col="4" api="roles" v-model="model.role_id" optionValue="id" :optionLabel="
-  (val) => (val.name ? val.name : model.role ? model.role.name : '')
+        (val) => (val.name ? val.name : model.role ? model.role.name : '')
       " label="role" />
     </s-form>
   </div>

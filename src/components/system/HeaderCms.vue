@@ -7,12 +7,13 @@
           <q-icon name="img:images/icons/left-drawer.svg" size="30px" />
         </q-btn>
         <!-- APP NAME  -->
-
+        
         <q-toolbar-title>
           <!-- AVATAR  -->
           <div>
             <div class="q-gutter-sm">
-              <q-icon :name="Meta ?  $Handle.checkMenusLabelOrIcon(Meta.menu_slug).icon.toString()  : ''" color="primary" size="30px" />
+              <q-icon :name="Meta ? $Handle.checkMenusLabelOrIcon(Meta.menu_slug).icon.toString() : ''" color="primary"
+                size="30px" />
               <q-btn noCaps size="sm" flat style="border: 1px solid rgba(0, 0, 0, 0.12);">
                 <span class="header-module-title" v-if="Meta">
                   {{ Meta && Meta.menu_slug ? $Handle.checkMenusLabelOrIcon(Meta.menu_slug).name : Meta.module_name ?
@@ -34,12 +35,6 @@
         <q-btn color="dark" label="Refresh" flat icon="cached" size="sm" @click="refresh">
           <q-tooltip>Refresh</q-tooltip>
         </q-btn>
-
-
-
-
-        <!-- <q-btn dense flat round icon="notifications" @click="toggleRightDrawer" size="sm" color="grey"
-          class="bg-white" /> -->
         <div class="column text-dark q-ml-lg">
           <div class="header-user-name ">{{ user && user.name ? user.name : '' }}</div>
           <div class="header-user-role">{{ user && user.role ? user.role.name : '' }}</div>
@@ -48,12 +43,10 @@
       </q-toolbar>
     </q-header>
 
-    <q-drawer class="bg-accent" v-model="leftDrawerOpen" side="left" bordered persistent show-if-above no-swipe-backdrop width="250">
-      <!-- FILTER  -->
-      <s-filter :table="table" v-if="filter && filter.value" @update:modelValue="(val) => updateFilter(val)"
-        :model-value="modelValue" @closeFilter="closeFilter" :filter="filter" @refresh="$emit('refreshQuery')" />
-      <!-- MENU  -->
-      <s-menu v-else :menus="menus" />
+    <!-- #  MENUS -->
+    <q-drawer class="bg-accent" v-model="leftDrawerOpen" side="left" bordered persistent show-if-above no-swipe-backdrop
+      width="250">
+      <s-menu :menus="menus" />
     </q-drawer>
 
     <q-drawer v-model="rightDrawerOpen" side="right" bordered>
@@ -72,7 +65,7 @@
           <div v-else>
             <div class="q-px-md q-mt-sm q-px-lg">
               <slot />
-          
+
             </div>
           </div>
         </div>
@@ -81,9 +74,9 @@
           <div
             :class="$q.screen.lt.md ? 'q-gutter-xs row justify-between  q-pb-lg' : 'q-gutter-xs row justify-between q-px-lg  q-mt-sm q-pb-lg'"
             v-if="hideOpt !== ''">
-            <t-button icon="arrow_left" label="back"  class="text-primary cursor-pointer text-bold" 
-              type="button" @click="$emit('back')" />
-            <t-button v-if="detail != ''" :label="'Simpan ' + (Meta && Meta.name ? Meta.name : '')"  type="submit"
+            <t-button icon="arrow_left" label="back" class="text-primary cursor-pointer text-bold" type="button"
+              @click="$emit('back')" />
+            <t-button v-if="detail != ''" :label="'Simpan ' + (Meta && Meta.name ? Meta.name : '')" type="submit"
               active="true" class="save-btn" />
             <q-btn v-if="useEdit == ''" :label="'Edit ' + (Meta && Meta.name ? Meta.name : '')" size="sm" type="submit"
               color="secondary" class="save-btn" @click="$emit('edit')" />
@@ -209,7 +202,7 @@ export default {
 .header-module-title {
   font-weight: 700;
   font-size: 12px;
-  color:$primary;
+  color: $primary;
   ;
 }
 

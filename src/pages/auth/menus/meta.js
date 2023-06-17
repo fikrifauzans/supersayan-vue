@@ -21,7 +21,7 @@ export default {
   table: {
     columns: (Help, Lang, Static) => {
       return [
-        { name: "id", label: "Option", field: "id", sortable: true, align: "left", },
+        { name: "id", label: "Option", field: "id", sortable: true, align: "left", width: 'auto' },
         { name: "name", label: "Name", field: "name", sortable: true, align: "left", },
         { name: "icon", label: "Icon", field: "icon", sortable: true, align: "left", },
         { name: "path", label: "Path", field: "path", sortable: true, align: "left", },

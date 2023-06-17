@@ -1,5 +1,4 @@
 <template>
-  <!-- eslint-disable vue/no-v-html -->
   <div class="relative-position">
     <q-tabs v-model="tab" class="bg-white text-primary q-pa-sm">
       <q-tab name="filter" icon="filter_alt" size="sm" ripple />
@@ -33,10 +32,7 @@
 
 export default {
   name: "FilterComponent",
-
   props: ["table", "modelValue"],
-
-
   created() { },
   data() {
     return {
@@ -47,7 +43,6 @@ export default {
   methods: {
     updateQuery() {
       this.$emit("refresh")
-
       this.$emit("update:modelValue", this.filter)
     },
     closeFilter() {
@@ -56,6 +51,4 @@ export default {
   },
 }
 </script>
-<style>
-
-</style>
+<style></style>

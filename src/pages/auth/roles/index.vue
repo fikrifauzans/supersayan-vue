@@ -1,9 +1,7 @@
 <template>
   <div>
-
     <s-loading :load="loading" />
-    <s-drawer @refresh="refresh" :Meta="Meta" :filter="filter" :table="table" v-model="filter.query"
-      @update:modelValue="refresh">
+    <s-drawer @refresh="refresh" :Meta="Meta" @update:modelValue="refresh" :table="Meta.table">
       <q-table virtual-scroll class="q-my-sm" :rows="table.rows" :columns="table.columns" row-key="id"
         selection="multiple" v-model:selected="table.selected" v-model:pagination="table.pagination"
         :style="$Static.table.height()" :dense="$Static.table.dense()" :flat="$Static.table.flat()"
@@ -12,49 +10,40 @@
         :bordered="$Static.table.bordered()" binary-state-sort :visible-columns="table.visibleColumns" @request="getData"
         :loading="loading" :filter="table.search" :separator="$Static.table.separator()">
         <template v-slot:top>
-          <!-- <q-btn label="test" @click="false" /> -->
           <s-top-table :Meta="Meta" :table="table" v-model="table.search" @delete="daleteData" :trash="trash"
-            @trash="setTrash" @restore="restoreData" @add="addData" @seachReset="table.search = null"
-            @onFilter="setFilter" :filter="filter"></s-top-table>
+            @trash="setTrash" @restore="restoreData" @add="addData" @seachReset="table.search = ''"
+            @updateVisibilityColumn="(val) => table.visibleColumns = val"></s-top-table>
+        </template>
+        <template v-slot:header>
+          <s-filter-table :vcolumn="table.visibleColumns" :columns="table.columns" @updateEvent="getData"
+            v-model="filter.query" @selectedAll="(val) => table.selected = val ? table.rows : []" />
         </template>
         <template v-slot:body-cell-id="props">
           <q-td v-if="trash == true"> </q-td>
           <s-table-option v-else @show="detail(props.key)" @edit="edit(props.key)" :Meta="Meta" />
         </template>
       </q-table>
-      <t-modal v-model="modal" @submit="submit">
-        <FormModal v-if="modalType == 'form'" :modal="useModal" :id="id" :submitOnModal="submitOnModal"
-          @closeModal="modal = !modal" @refresh="refresh" />
-        <Detail v-else :modal="useModal" :id="id" />
-      </t-modal>
     </s-drawer>
   </div>
 </template>
 <script>
-import { ref } from "vue"
+
 import Meta from "./meta"
-import FormModal from "./form"
-import Detail from "./detail"
+
 export default {
   name: Meta.name,
-  components: {
-    FormModal,
-    Detail,
-  },
+
   data() {
     return {
       Meta,
-      id: null,
       table: Meta.table,
-      useModal: Meta.formType,
       loading: false,
       modal: false,
       trash: false,
-      modalType: "",
-      submitOnModal: null,
       filter: {
         value: false,
-        query: null,
+        query: { like: '', orderBy: '' },
+        visibleColumns: []
       },
     }
   },
@@ -71,16 +60,17 @@ export default {
     refresh() {
       this.getData()
     },
+
     getData(props) {
       this.loading = true
       if (props) this.table.pagination = props.pagination
       let { page, rowsPerPage, sortBy, descending } = { ...this.table.pagination }
       let endpoint = this.Meta.module + "?table="
-      endpoint += "&like=" + this.$Help.transformQuery(this.filter.query)
       endpoint += this.trash ? "&trash=true" : ""
+      endpoint += "&like=" + this.filter.query.like
+      endpoint += "&order=" + this.filter.query.orderBy
       endpoint += "&page=" + page
       endpoint += "&limit=" + rowsPerPage
-      endpoint += "&order=" + this.$Handle.transformDesc(sortBy, descending)
       if (this.table.search) endpoint += "&search=" + this.table.search
       this.$api.get(
         endpoint,
@@ -99,9 +89,7 @@ export default {
         },
         (e) => { }
       )
-      this.$router.replace({
-        query: { ...this.table.pagination, seach: this.table.search, trash: this.trash },
-      })
+      this.$router.replace({ query: { ...this.table.pagination, search: this.table.search, trash: this.trash, }, })
     },
     async daleteData() {
       this.loading = true
@@ -136,51 +124,15 @@ export default {
       this.table.search = null
       this.table.pagination.page = 1
       this.table.pagination.rowsNumber = 1
+      this.refresh()
 
-      this.refresh()
     },
-    detail(id) {
-      this.id = id
-      this.modalType = "detail"
-      if (this.useModal.show === true) {
-        this.modal = true
-      } else {
-        this.$router.push({
-          params: { id },
-          name: "view-" + this.Meta.module,
-          query: { ...this.$route.query },
-        })
-      }
-    },
-    edit(id) {
-      this.modalType = "form"
-      if (this.useModal.edit === true) {
-        this.modal = true
-        this.id = id
-      } else {
-        this.$router.push({
-          params: { id },
-          name: "edit-" + this.Meta.module,
-          query: { ...this.$route.query },
-        })
-      }
-    },
-    addData() {
-      this.modalType = "form"
-      if (this.useModal.add === true) {
-        this.modal = true
-      } else {
-        this.$router.push({
-          name: "add-" + this.Meta.module,
-          query: { ...this.$route.query },
-        })
-      }
-    },
-    submit(evt) {
-      this.$Handle.loadingStart()
-      this.submitOnModal = evt
-      this.refresh()
-    },
+    detail(id) { this.$router.push({ params: { id }, name: "view-" + this.Meta.module, query: { ...this.$route.query } }) },
+
+    edit(id) { this.$router.push({ params: { id }, name: "edit-" + this.Meta.module, query: { ...this.$route.query } }) },
+
+    addData() { this.$router.push({ name: "add-" + this.Meta.module, query: { ...this.$route.query } }) },
+
     setFilter() {
       this.filter.value = true
       // this.left = !this.left
