@@ -42,7 +42,7 @@ export default {
 
         { name: 'product-name', label: 'Product', field: 'product_name', sortable: true, align: 'left', },
 
-        { name: 'price', label: 'Price', field: 'price', sortable: true, align: 'left', },
+        { name: 'price', label: 'Price', field: (val) => 'Rp. ' + Help.transformMoney(val.price), sortable: true, align: 'left', },
 
         { name: 'qty', label: 'Qty', field: 'qty', sortable: true, align: 'left', },
 
@@ -50,11 +50,11 @@ export default {
 
         { name: 'discount_in_percent', label: 'Discount In Percent', field: 'discount_in_percent', sortable: true, align: 'left', },
 
-        { name: 'discount_in_rupiah', label: 'Discount In Rupiah', field: 'discount_in_rupiah', sortable: true, align: 'left', },
+        { name: 'discount_in_rupiah', label: 'Discount In Rupiah', field: (val) => 'Rp. ' + Help.transformMoney(val.discount_in_rupiah), sortable: true, align: 'left', },
 
-        { name: 'amount', label: 'Amount', field: 'amount', sortable: true, align: 'left', },
+        { name: 'amount', label: 'Amount', field:(val) => 'Rp. ' + Help.transformMoney(val.amount), sortable: true, align: 'left', },
 
-        { name: 'total', label: 'Total', field: 'total', sortable: true, align: 'left', },
+        { name: 'total', label: 'Total',field:(val) => 'Rp. ' + Help.transformMoney(val.total), sortable: true, align: 'left', },
 
       ]
     }

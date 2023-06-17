@@ -12,8 +12,8 @@ export default {
     } else if (status == 403) {
       window.location = '/403'
     } else if (status == 500) {
-      // this.Handle.clearAllLS()
-      // window.location = '/login'
+      this.Handle.clearAllLS()
+      window.location = '/login'
     }
     this.Handle.loadingStop()
   }

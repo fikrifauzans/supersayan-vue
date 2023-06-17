@@ -38,7 +38,7 @@ export default {
 
         { name: 'name', label: 'Name', field: 'name', sortable: true, align: 'left', },
 
-        { name: 'price', label: 'Price', field: 'price', sortable: true, align: 'left', },
+        { name: 'price', label: 'Price', field: (val) => 'Rp. ' + Help.transformMoney(val.price), sortable: true, align: 'left', },
 
         { name: 'stock', label: 'Stock', field: 'stock', sortable: true, align: 'left', },
 

@@ -44,13 +44,13 @@
 
                 { name: 'customer-name', label: 'Customer', field: 'customer_name', sortable: true, align: 'left', },
 
-                { name: 'subtotal', label: 'Subtotal', field: 'subtotal', sortable: true, align: 'left', },
+                { name: 'subtotal', label: 'Subtotal', field: (val) => 'Rp. ' + Help.transformMoney(val.subtotal), sortable: true, align: 'left', },
 
                 { name: 'discount', label: 'Discount', field: 'discount', sortable: true, align: 'left', },
 
                 { name: 'ongkir', label: 'Ongkir', field: 'ongkir', sortable: true, align: 'left', },
 
-                { name: 'total', label: 'Total', field: 'total', sortable: true, align: 'left', },
+                { name: 'total', label: 'Total', field: (val) => 'Rp. ' + Help.transformMoney(val.total), sortable: true, align: 'left', },
 
                 ]
               }

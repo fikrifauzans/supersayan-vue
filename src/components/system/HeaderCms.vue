@@ -4,10 +4,10 @@
       <q-toolbar>
         <!-- LEFT MENU  -->
         <q-btn dense flat round size="md " color="dark" @click="toggleLeftDrawer">
-          <q-icon name="img:images/icons/left-drawer.svg" size="30px" />
+          <q-icon name="menu" size="30px" />
         </q-btn>
         <!-- APP NAME  -->
-        
+
         <q-toolbar-title>
           <!-- AVATAR  -->
           <div>
