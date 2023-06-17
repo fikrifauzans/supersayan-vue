@@ -26,5 +26,10 @@ export default [
   { name: 'edit-products', path: 'products/form/:id', component: () => import('pages/master/products/form.vue') },
   { name: 'view-products', path: 'products/:id', component: () => import('pages/master/products/detail.vue') },
 
+  { name: 'transactions', path: 'transactions', component: () => import('pages/transaction/transactions/index.vue') },
+  { name: 'add-transactions', path: 'transactions/form', component: () => import('pages/transaction/transactions/form.vue') },
+  { name: 'edit-transactions', path: 'transactions/form/:id', component: () => import('pages/transaction/transactions/form.vue') },
+  { name: 'view-transactions', path: 'transactions/:id', component: () => import('pages/transaction/transactions/detail.vue') },
+
 
 ];

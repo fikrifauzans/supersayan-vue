@@ -1,60 +1,63 @@
 
-        export default {
-            name: 'Transaction Details',
-            module: 'transaction-details',
-            schema: 'transaction', 
-            module_name: 'Transaction Details',
-          
+export default {
+  name: 'Transaction Details',
+  module: 'transaction-details',
+  schema: 'transaction',
+  module_name: 'Transaction Details',
 
-            formType: {
-              show: false,
-              edit: false,
-              add: false
-            },
-            model: {
-                
-              transaction_id:null,
 
-              barang_id:null,
+  formType: {
+    show: false,
+    edit: false,
+    add: false
+  },
+  model: {
 
-              price:null,
+    transaction_id: null,
 
-              qty:null,
+    product_id: null,
 
-              discount_in_percent:null,
+    price: null,
 
-              discount_in_rupiah:null,
+    qty: null,
 
-              amount:null,
+    last_stock: null,
 
-              total:null,
+    discount_in_percent: null,
 
-            },
-   
-            table: {
-              columns: (Help, Lang, Static) => {
-                return [
-                  { name: 'id', label: 'Option', field: 'id', sortable: true, align: 'left', },
+    discount_in_rupiah: null,
 
-                { name: 'transaction_id', label: 'Transaction Id', field: 'transaction_id', sortable: true, align: 'left', },
+    amount: null,
 
-                { name: 'barang_id', label: 'Barang Id', field: 'barang_id', sortable: true, align: 'left', },
+    total: null,
 
-                { name: 'price', label: 'Price', field: 'price', sortable: true, align: 'left', },
+  },
 
-                { name: 'qty', label: 'Qty', field: 'qty', sortable: true, align: 'left', },
+  table: {
+    columns: (Help, Lang, Static) => {
+      return [
+        { name: 'id', label: 'Option', field: 'id', sortable: true, align: 'left', },
 
-                { name: 'discount_in_percent', label: 'Discount In Percent', field: 'discount_in_percent', sortable: true, align: 'left', },
+        { name: 'transaction-code', label: 'Transaction', field: 'transaction_code', sortable: true, align: 'left', },
 
-                { name: 'discount_in_rupiah', label: 'Discount In Rupiah', field: 'discount_in_rupiah', sortable: true, align: 'left', },
+        { name: 'product-name', label: 'Product', field: 'product_name', sortable: true, align: 'left', },
 
-                { name: 'amount', label: 'Amount', field: 'amount', sortable: true, align: 'left', },
+        { name: 'price', label: 'Price', field: 'price', sortable: true, align: 'left', },
 
-                { name: 'total', label: 'Total', field: 'total', sortable: true, align: 'left', },
+        { name: 'qty', label: 'Qty', field: 'qty', sortable: true, align: 'left', },
 
-                ]
-              }
-            }
-          }
-          
-        
+        { name: 'last_stock', label: 'Last Stock', field: 'last_stock', sortable: true, align: 'left', },
+
+        { name: 'discount_in_percent', label: 'Discount In Percent', field: 'discount_in_percent', sortable: true, align: 'left', },
+
+        { name: 'discount_in_rupiah', label: 'Discount In Rupiah', field: 'discount_in_rupiah', sortable: true, align: 'left', },
+
+        { name: 'amount', label: 'Amount', field: 'amount', sortable: true, align: 'left', },
+
+        { name: 'total', label: 'Total', field: 'total', sortable: true, align: 'left', },
+
+      ]
+    }
+  }
+}
+

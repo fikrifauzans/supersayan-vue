@@ -6,9 +6,10 @@
       <div>
         <s-form class='q-px-md q-py-lg' title='Form Transaction Details'>
 <t-currency col='4' label='transaction_id' currency v-model='model.transaction_id'  topLabel='transaction_id' />
-<t-currency col='4' label='barang_id' currency v-model='model.barang_id'  topLabel='barang_id' />
+<t-currency col='4' label='product_id' currency v-model='model.product_id'  topLabel='product_id' />
 <t-currency col='4' label='price' currency v-model='model.price'  topLabel='price' />
 <t-currency col='4' label='qty' currency v-model='model.qty'  topLabel='qty' />
+<t-currency col='4' label='last_stock' currency v-model='model.last_stock'  topLabel='last_stock' />
 <t-currency col='4' label='discount_in_percent' currency v-model='model.discount_in_percent'  topLabel='discount_in_percent' />
 <t-currency col='4' label='discount_in_rupiah' currency v-model='model.discount_in_rupiah'  topLabel='discount_in_rupiah' />
 <t-currency col='4' label='amount' currency v-model='model.amount'  topLabel='amount' />

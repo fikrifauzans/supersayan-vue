@@ -81,7 +81,8 @@ export default {
   props: ['modal', 'id', 'submitOnModal'],
   created() {
     this.$Handle.loadingStart()
-    this.Meta.model = {}
+    this.model = this.$Handle.resetObjectValue(this.Meta.model)
+
     if (this.$route.params.id) {
       this.param = this.$route.params.id ? this.$route.params.id : null
     }
@@ -174,8 +175,13 @@ export default {
         item.total = item.qty * item.amount
       }
 
-      this.model.subtotal = this.model.transaction_details.map((v) => v.total).reduce((acc, cv) => acc + cv)
-      this.model.total = (this.model.subtotal - this.model.discount + this.model.ongkir)
+      try {
+        this.model.subtotal = this.model.transaction_details.map((v) => v.total).reduce((acc, cv) => acc + cv)
+        this.model.total = (this.model.subtotal - this.model.discount + this.model.ongkir)
+      } catch (error) {
+        return false
+      }
+
 
     }
   },

@@ -42,7 +42,7 @@
 
                 { name: 'date', label: 'Date', field: 'date', sortable: true, align: 'left', },
 
-                { name: 'customer_id', label: 'Customer Id', field: 'customer_id', sortable: true, align: 'left', },
+                { name: 'customer-name', label: 'Customer', field: 'customer_name', sortable: true, align: 'left', },
 
                 { name: 'subtotal', label: 'Subtotal', field: 'subtotal', sortable: true, align: 'left', },
 

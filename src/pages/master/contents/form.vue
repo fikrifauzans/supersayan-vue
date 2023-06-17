@@ -40,7 +40,7 @@ export default {
   created() {
     this.$Handle.loadingStart()
     this.allowForm = this.Meta.table.columns(this.$route.query.tab)
-    console.log(this.allowForm);
+    
     this.Meta.model = { ...Meta.model }
     if (this.$route.params.id) {
       this.param = this.$route.params.id ? this.$route.params.id : null

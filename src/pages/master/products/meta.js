@@ -32,7 +32,7 @@ export default {
       return [
         { name: 'id', label: 'Option', field: 'id', sortable: true, align: 'left', },
 
-        { name: 'category_id', label: 'Category', field: 'category_name', sortable: true, align: 'left', },
+        { name: 'category-name', label: 'Category', field: 'category_name', sortable: true, align: 'left', },
 
         { name: 'code', label: 'Code', field: 'code', sortable: true, align: 'left', },
 
