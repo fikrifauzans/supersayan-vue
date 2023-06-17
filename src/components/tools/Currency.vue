@@ -5,12 +5,11 @@
     :color="color ? color : 'primary'">
     <template v-slot:control="{ id, floatingLabel }">
       <money :id="id" class="q-field__input text-right" :model-value="modelValue" v-bind="moneyFormatForComponent"
-        v-show="floatingLabel" @update:model-value="
-          (value) => {
+        v-show="floatingLabel" @update:model-value="(value) => {
             $emit('update:modelValue', parseInt(value));
             $emit('onkeyup');
           }
-        " :readonly="readonly == ''" />
+          " :readonly="readonly == ''" />
     </template>
   </q-field>
 </template>
@@ -44,6 +43,4 @@ export default {
   },
 };
 </script>
-<style>
-
-</style>
+<style></style>

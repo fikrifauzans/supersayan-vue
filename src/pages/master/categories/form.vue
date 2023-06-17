@@ -1,14 +1,14 @@
 
-        <template>
+<template>
   <div>
     <s-loading :load='loading' />
     <s-drawer @refresh='refresh' :useModal='useModal' form @submit='submit' @back='back' :Meta='Meta'>
       <div>
         <s-form class='q-px-md q-py-lg' title='Form Categories'>
-<t-input col='4' label='group' v-model='model.group' topLabel='group' />
-<t-input col='4' label='code' v-model='model.code' topLabel='code' />
-<t-input col='4' label='name' v-model='model.name' topLabel='name' />
-<t-text-editor col='4' label='remark'  type='textarea' v-model='model.remark' />
+          <t-input col='6' label='code' v-model='model.code' topLabel='code' readonly />
+          <t-input col='6' label='name' v-model='model.name' topLabel='name'
+            @updateEvent="(val) => model.code = `CTG-${val.toUpperCase()}`" />
+          <t-input col='12' label='remark' type='textarea' v-model='model.remark' />
 
         </s-form>
       </div>

@@ -1,6 +1,7 @@
 <template>
   <q-input :model-value="modelValue" outlined :dense="dense === false ? false : true" v-if="dateTime === ''"
     :class="`col-12 col-sm-6 col-md-${col} q-px-xs q-pb-lg`"
+    :readonly="readonly"
     @update:model-value="(val) => $emit('update:modelValue', val)" :label="label">
     <template v-slot:prepend> </template>
     <template v-slot:append>
@@ -27,6 +28,7 @@
   </q-input>
   <q-input v-else-if="onlyTime === ''" :model-value="modelValue" outlined :dense="dense === false ? false : true"
     :class="`col-12 col-sm-6 col-md-${col} q-px-xs q-pb-lg`"
+    :readonly="readonly"
     @update:model-value="(val) => $emit('update:modelValue', val)" :label="label">
     <template v-slot:prepend> </template>
     <template v-slot:append>

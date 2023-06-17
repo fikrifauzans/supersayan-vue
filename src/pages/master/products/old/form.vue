@@ -4,12 +4,11 @@
     <s-loading :load='loading' />
     <s-drawer @refresh='refresh' :useModal='useModal' form @submit='submit' @back='back' :Meta='Meta'>
       <div>
-        <s-form class='q-px-md q-py-lg' title='Form Customers'>
-          <t-input col='4' label='code' v-model='model.code' topLabel='code' readonly />
-          <t-input col='4' label='name' v-model='model.name' topLabel='name'
-            @updateEvent="() => model.code = `CUST-${$Help.randomString(5)}`" />
-          <t-input col='4' label='phone' v-model='model.phone' topLabel='phone' />
-          <t-input col='4' label='address' v-model='model.address' topLabel='address' type="textarea" />
+        <s-form class='q-px-md q-py-lg' title='Form Products'>
+     
+          <t-input col='6' label='price' v-model='model.price' topLabel='price' />
+          <t-currency col='6' label='stock' currency v-model='model.stock' topLabel='stock' />
+          <t-input col='6' label='remark' type='textarea' v-model='model.remark' />
 
         </s-form>
       </div>

@@ -1,22 +1,27 @@
 
-        <template>
+<template>
   <div>
     <s-loading :load='loading' />
     <s-drawer @refresh='refresh' :useModal='useModal' form @submit='submit' @back='back' :Meta='Meta'>
       <div>
         <s-form class='q-px-md q-py-lg' title='Form Transactions'>
-<t-input col='4' label='code' v-model='model.code' topLabel='code' />
-<t-datetime v-model='model.date' col='4' dateTime label='date'  topLabel='date' />
-<t-currency col='4' label='customer_id' currency v-model='model.customer_id'  topLabel='customer_id' />
-
+          <t-input col='4' label='code' v-model='model.code' topLabel='code' readonly />
+          <t-datetime v-model='model.date' col='4' dateTime label='date' topLabel='date' readonly />
+          <t-currency col='4' label='customer_id' currency v-model='model.customer_id' topLabel='customer_id' />
+          <t-currency col='4' label='subtotal' currency v-model='model.subtotal' topLabel='subtotal' />
+          <t-currency col='4' label='discount' currency v-model='model.discount' topLabel='discount' />
+          <t-currency col='4' label='ongkir' currency v-model='model.ongkir' topLabel='ongkir' />
+          <t-currency col='4' label='total' currency v-model='model.total' topLabel='total' />
         </s-form>
       </div>
     </s-drawer>
   </div>
+
 </template>
 
 <script>
 import Meta from './meta'
+import { date } from 'quasar'
 
 export default {
   name: Meta.name + 'Form',
@@ -31,6 +36,15 @@ export default {
     if (this.modal && this.modal.add === true) this.useModal = true
     if (this.modal && this.modal.edit === true) this.useModal = true
     if (this.param !== null) this.findId(this.param)
+
+    this.model.code = `TRX-${this.$Help.randomString(10)}`
+
+    setInterval(() => {
+      this.model.date = this.$Help.generateDate()
+    }, 1000);
+
+
+
     this.$Handle.loadingStop()
   },
   data() {
@@ -41,6 +55,7 @@ export default {
       loading: false,
       edit: false,
       param: null,
+      date: date
     }
   },
 

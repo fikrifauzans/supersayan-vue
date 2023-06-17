@@ -51,4 +51,15 @@ export default {
     if (format == 'object') return { days, hours, minutes, seconds }
   },
 
+  generateDate() {
+    const date = new Date()
+    const day = date.getDate()
+    const month = date.getMonth()
+    const year = date.getFullYear()
+    const hours = date.getHours()
+    const minute = date.getMinutes()
+    return `${year}-${month}-${day} ${hours}:${minute}`
+
+  }
+
 }

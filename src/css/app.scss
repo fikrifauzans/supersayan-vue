@@ -98,23 +98,23 @@
 }
 
 // TOP TABLE STYLE
-.q-absolute_label.q-field--focused // on focused
+// .q-absolute_label.q-field--focused // on focused
 
->.q-field__inner>.q-field__control>.q-field__control-container>.q-field__label {
-  top: 0;
-  left: 10;
-  background: white;
-  z-index: 100;
-  border-radius: 20px;
-  padding-right: 2.5px;
-  padding-left: 2.5px;
-  tarnsform: translateY(-100%) scale(0.75);
-}
+// >.q-field__inner>.q-field__control>.q-field__control-container>.q-field__label {
+//   top: 0;
+//   left: 10;
+//   background: white;
+//   z-index: 100;
+//   border-radius: 20px;
+//   padding-right: 2.5px;
+//   padding-left: 2.5px;
+//   tarnsform: translateY(-100%) scale(0.75);
+// }
 
-.q-absolute_label.q-field--focused>.q-field__inner>.q-field__control>.q-field__control-container>.q-field__native {
-  // input
-  margin-bottom: 10px;
-}
+// .q-absolute_label.q-field--focused>.q-field__inner>.q-field__control>.q-field__control-container>.q-field__native {
+//   // input
+//   margin-bottom: 10px;
+// }
 
 
 // ------------------------------------------- FORM

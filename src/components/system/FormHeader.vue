@@ -1,29 +1,25 @@
 <template>
-  <q-card flat :class="`fit bg-transparent`">
-    <div class="row col-12">
-      <div class="col-12 row">
-        <div class="row justify-between col-12">
-          <div class="text-bold text-h6 text-dark q-mb-md" v-if="title">
-            <q-icon :name="icon != null ? icon : ''" /> {{ title ? title : "" }}
-          </div>
-          <div>
-            <slot name="right" />
+  <div>
+    <q-card   :class="`fit bg-transparent q-px-md shadow-1`">
+      <div class="row col-12">
+
+        <div :class="disableShadow == ''
+          ? 'col-12 content-form bg-white'
+          : 'col-12  content-form bg-white'
+          ">
+          <div class="row  q-pa-md col-12">
+            <div class="text-bold text-h6 text-dark q-mb-lg " v-if="title">
+              {{ title }}
+            </div>
+            <div class="col-12 row">
+              <slot />
+
+            </div>
           </div>
         </div>
       </div>
-      <div
-        :class="
-          disableShadow == ''
-            ? 'col-12 content-form bg-white'
-            : 'col-12 shadow-6 content-form bg-white'
-        "
-      >
-        <div class="row q-mx-sm q-pa-md q-py-lg col-12">
-          <slot />
-        </div>
-      </div>
-    </div>
-  </q-card>
+    </q-card>
+  </div>
 </template>
 <script>
 export default {

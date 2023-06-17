@@ -1,16 +1,18 @@
 
-        <template>
+<template>
   <div>
     <s-loading :load='loading' />
     <s-drawer @refresh='refresh' :useModal='useModal' form @submit='submit' @back='back' :Meta='Meta'>
       <div>
         <s-form class='q-px-md q-py-lg' title='Form Products'>
-<t-text-editor col='4' label='category_id'  type='textarea' v-model='model.category_id' />
-<t-input col='4' label='code' v-model='model.code' topLabel='code' />
-<t-input col='4' label='name' v-model='model.name' topLabel='name' />
-<t-input col='4' label='price' v-model='model.price' topLabel='price' />
-<t-currency col='4' label='stock' currency v-model='model.stock'  topLabel='stock' />
-<t-text-editor col='4' label='remark'  type='textarea' v-model='model.remark' />
+          <t-input col='6' label='code' v-model='model.code' topLabel='code' readonly />
+          <t-select-api col='6' label='category' currency v-model='model.category_id' topLabel='category_id'
+            api="categories" optionLabel="name" optionValue="id" />
+          <t-input col='6' label='name' v-model='model.name' topLabel='name'
+            @updateEvent="(val) => model.code = `PROD-${val.toUpperCase()}`" />
+          <t-currency col='6' label='stock' currency v-model='model.stock' topLabel='stock' />
+          <t-currency col='6' label='price' currency v-model='model.price' topLabel='price' />
+          <t-input col='6' label='remark' type='textarea' v-model='model.remark' />
 
         </s-form>
       </div>
