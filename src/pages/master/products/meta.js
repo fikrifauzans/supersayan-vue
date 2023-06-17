@@ -1,9 +1,9 @@
 
         export default {
-            name: 'Categories',
-            module: 'categories',
+            name: 'Products',
+            module: 'products',
             schema: 'master', 
-            module_name: 'Categories',
+            module_name: 'Products',
           
 
             formType: {
@@ -13,11 +13,15 @@
             },
             model: {
                 
-              group:null,
+              category_id:null,
 
               code:null,
 
               name:null,
+
+              price:null,
+
+              stock:null,
 
               remark:null,
 
@@ -28,11 +32,15 @@
                 return [
                   { name: 'id', label: 'Option', field: 'id', sortable: true, align: 'left', },
 
-                { name: 'group', label: 'Group', field: 'group', sortable: true, align: 'left', },
+                { name: 'category_id', label: 'Category Id', field: 'category_id', sortable: true, align: 'left', },
 
                 { name: 'code', label: 'Code', field: 'code', sortable: true, align: 'left', },
 
                 { name: 'name', label: 'Name', field: 'name', sortable: true, align: 'left', },
+
+                { name: 'price', label: 'Price', field: 'price', sortable: true, align: 'left', },
+
+                { name: 'stock', label: 'Stock', field: 'stock', sortable: true, align: 'left', },
 
                 { name: 'remark', label: 'Remark', field: 'remark', sortable: true, align: 'left', },
 

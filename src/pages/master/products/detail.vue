@@ -5,7 +5,7 @@
     <s-drawer @refresh='refresh' :useModal='useModal' form detail :Meta='Meta' @back='back'>
       <div class='row'>
         <div class='col-md-6 col-12'>
-          <s-form class='q-px-md py-sm q-mt-lg col-6' title='Categories'>
+          <s-form class='q-px-md py-sm q-mt-lg col-6' title='Products'>
             <t-list :list='mainList' />
           </s-form>
         </div>

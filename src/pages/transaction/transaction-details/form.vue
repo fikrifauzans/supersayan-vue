@@ -4,11 +4,10 @@
     <s-loading :load='loading' />
     <s-drawer @refresh='refresh' :useModal='useModal' form @submit='submit' @back='back' :Meta='Meta'>
       <div>
-        <s-form class='q-px-md q-py-lg' title='Form Categories'>
-<t-input col='4' label='group' v-model='model.group' topLabel='group' />
-<t-input col='4' label='code' v-model='model.code' topLabel='code' />
-<t-input col='4' label='name' v-model='model.name' topLabel='name' />
-<t-text-editor col='4' label='remark'  type='textarea' v-model='model.remark' />
+        <s-form class='q-px-md q-py-lg' title='Form Transaction Details'>
+<t-currency col='4' label='transaction_id' currency v-model='model.transaction_id'  topLabel='transaction_id' />
+<t-currency col='4' label='barang_id' currency v-model='model.barang_id'  topLabel='barang_id' />
+<t-currency col='4' label='qty' currency v-model='model.qty'  topLabel='qty' />
 
         </s-form>
       </div>

@@ -21,8 +21,8 @@ const routes = [
     path: '/login', component: () => import('layouts/LoginLayout.vue'),
     children: [
       { path: '', name: 'login', component: () => import('pages/login/login.vue') },
-      { path: 'create', name: 'register', component: () => import('pages/login/create.vue') },
-      // { path: 'verification', name: 'jamaah-verification', component: () => imprt('pages/login/verification.vue'), },
+      { path: 'create', name: 'jamaah-create', component: () => import('pages/login/create.vue') },
+      { path: 'verification', name: 'jamaah-verification', component: () => imprt('pages/login/verification.vue'), },
     ],
   },
 
