@@ -20,7 +20,7 @@ export default {
     page: null,
     device: null,
     title: null,
-    subtitle: null,
+  subtitle: null,
     description: null,
     path: null,
     link: null,
