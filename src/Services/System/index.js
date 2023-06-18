@@ -3,7 +3,7 @@ class System {
   // API CONFIG
   apiRoot() {
 
-    // if (window.location.origin == 'http://localhost:8080') return 'http://localhost:8090/'
+    if (window.location.origin == 'http://localhost:8080') return 'http://localhost:8090/'
     return 'https://qtasnim-api.beytcoffeetigabelas.com/'
   }
   apiTimeout() { return 10000 }

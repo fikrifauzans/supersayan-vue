@@ -1,17 +1,16 @@
 
 <template>
-  <q-form class="text-h6 col-12 items-center row justify-center bg-grey-6 q-py-xl q-px-md text-white" @submit="login">
+  <q-form class="text-h6 col-12 items-center row justify-center bg-primary q-py-xl q-px-md text-white" @submit="login">
     <div class="col-12 justify-start row" v-if="type == 'login'">
       <div class="text-h5 text-bold col-12"></div>
       <div class="col-12  q-mb-xl text-bold text-h6">
         <div class="col-12 row justify-center">
-          <q-img src="~assets/images/qtasnim.png" style="width:400px" />
         </div>
         <div class="text-h6 text-bold text-center">
           Selamat Datang Di Interview App Project
         </div>
         <div class="text text-h6 text-bold text-center">
-          PT. Qtasnim Digital Teknologi
+          PT. Mitra Sinerji Teknoindo
         </div>
       </div>
       <div class="col-12">
