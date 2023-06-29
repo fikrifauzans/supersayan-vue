@@ -4,7 +4,7 @@ class System {
   apiRoot() {
 
     if (window.location.origin == 'http://localhost:8080') return 'http://localhost:8090/'
-    return 'https://mst-api.beytcoffeetigabelas.com/'
+    return 'https://yubi-api.beytcoffeetigabelas.com/'
   }
   apiTimeout() { return 10000 }
 
@@ -16,17 +16,8 @@ class System {
     return 'api/v1/'
   }
 
-  midtransClientKey() {
-    return 'SB-Mid-client-BI85k5nvzyemnk7n'
-  }
 
-  midtransUrl() {
-    return 'https://app.sandbox.midtrans.com/snap/snap.js'
-  }
 
-  apiUms() {
-    return 'https://api.ums.dutabaitullah.com/api/v1/en/'
-  }
 
   storageUrl(suffix = '') {
     return this.apiRoot() + 'storage/' + suffix
