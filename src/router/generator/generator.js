@@ -3,10 +3,10 @@ export default [
 
     
            
-   { name: 'transaction-details', path: 'transaction-details', component: () => import('pages/transaction/transaction-details/index.vue') },
-   { name: 'add-transaction-details', path: 'transaction-details/form', component: () => import('pages/transaction/transaction-details/form.vue') },
-   { name: 'edit-transaction-details', path: 'transaction-details/form/:id', component: () => import('pages/transaction/transaction-details/form.vue') },
-   { name: 'view-transaction-details', path: 'transaction-details/:id', component: () => import('pages/transaction/transaction-details/detail.vue') },
+   { name: 'contacts', path: 'contacts', component: () => import('pages/master/contacts/index.vue') },
+   { name: 'add-contacts', path: 'contacts/form', component: () => import('pages/master/contacts/form.vue') },
+   { name: 'edit-contacts', path: 'contacts/form/:id', component: () => import('pages/master/contacts/form.vue') },
+   { name: 'view-contacts', path: 'contacts/:id', component: () => import('pages/master/contacts/detail.vue') },
 
               
 ];

@@ -10,7 +10,7 @@
           Selamat Datang Di Interview App Project
         </div>
         <div class="text text-h6 text-bold text-center">
-          PT. Mitra Sinerji Teknoindo
+          PT. Yubi Technology
         </div>
       </div>
       <div class="col-12">

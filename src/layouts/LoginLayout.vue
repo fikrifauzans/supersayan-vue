@@ -7,8 +7,9 @@
       <router-view />
     </div>
     <div v-if="$q.screen.gt.sm" class="col-md-7 relative-position bg-secondary">
-      <div class="fit column justify-center items-center relative-position">
-        <q-img src="~assets/images/mst.png" style="width:400px" />
+      <div class="fit column justify-center items-center relative-position bg-secondary">
+        <q-img src="http://yubiteck.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fyubi_logo.8243810c.png&w=3840&q=75"
+          style="width:100px" />
 
         <!-- <q-img src="~assets/images/login-background.jpg" style="width: 400px;" /> -->
         <div class="col-12  q-mb-md text-primary absolute-bottom text-center">

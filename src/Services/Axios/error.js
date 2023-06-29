@@ -13,8 +13,7 @@ export default {
       window.location = '/403'
     } else if (status == 500) {
       this.Handle.clearAllLS()
-      window.location = '/login'
-    }
+      window.location = '/login'   }
     this.Handle.loadingStop()
   }
 }
